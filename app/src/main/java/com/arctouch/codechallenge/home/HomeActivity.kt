@@ -16,7 +16,7 @@ class HomeActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_activity)
 
-        api.upcomingMovies(TmdbApi.API_KEY, TmdbApi.DEFAULT_LANGUAGE, 1, TmdbApi.DEFAULT_REGION)
+        /*api.upcomingMovies(TmdbApi.API_KEY, TmdbApi.DEFAULT_LANGUAGE, 1, TmdbApi.DEFAULT_REGION)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
@@ -25,6 +25,6 @@ class HomeActivity : BaseActivity() {
                 }
                 recyclerView.adapter = HomeAdapter(moviesWithGenres)
                 progressBar.visibility = View.GONE
-            }
+            }*/
     }
 }
