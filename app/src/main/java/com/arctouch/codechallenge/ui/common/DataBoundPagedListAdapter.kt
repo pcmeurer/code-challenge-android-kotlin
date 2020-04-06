@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
 import com.arctouch.codechallenge.AppExecutors
 
 /**
@@ -29,10 +30,10 @@ import com.arctouch.codechallenge.AppExecutors
  * @param <T> Type of the items in the list
  * @param <V> The type of the ViewDataBinding
 </V></T> */
-abstract class DataBoundListAdapter<T, V : ViewDataBinding>(
+abstract class DataBoundPagedListAdapter<T, V : ViewDataBinding>(
         appExecutors: AppExecutors,
         diffCallback: DiffUtil.ItemCallback<T>
-) : ListAdapter<T, DataBoundViewHolder<V>>(
+) : PagedListAdapter<T, DataBoundViewHolder<V>>(
     AsyncDifferConfig.Builder<T>(diffCallback)
         .setBackgroundThreadExecutor(appExecutors.diskIO())
         .build()
@@ -49,7 +50,7 @@ abstract class DataBoundListAdapter<T, V : ViewDataBinding>(
         holder.binding.executePendingBindings()
     }
 
-    protected abstract fun bind(binding: V, item: T, position: Int)
+    protected abstract fun bind(binding: V, item: T?, position: Int)
 
     fun getItemAt(position: Int) = this.getItem(position)
 }

@@ -6,7 +6,19 @@
 
     <fragment
         android:id="@+id/fragment_home"
-        android:name="com.arctouch.codechallenge.home.HomeFragment">
+        android:name="com.arctouch.codechallenge.ui.home.HomeFragment">
+
+        <action
+            android:id="@+id/action_home_to_detail"
+            app:destination="@+id/fragment_detail">
+            <argument
+                android:name="movieId"
+                app:argType="integer" />
+        </action>
 
     </fragment>
+
+    <fragment
+        android:id="@+id/fragment_detail"
+        android:name="com.arctouch.codechallenge.ui.detail.DetailFragment" />
 </navigation>

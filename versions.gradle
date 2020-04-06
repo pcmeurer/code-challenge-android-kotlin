@@ -12,6 +12,7 @@ versions.retrofit = "2.6.2"
 versions.retrofit_coroutines_adapter = "0.9.2"
 versions.okhttp3 = "3.9.1"
 versions.lifecycle = "2.2.0-rc01"
+versions.glide = "4.11.0"
 ext.versions = versions
 
 def deps = [:]
@@ -39,7 +40,7 @@ deps.databinding = databinding
 
 def retrofit = [:]
 retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
-retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+retrofit.moshi = "com.squareup.retrofit2:converter-moshi:$versions.retrofit"
 retrofit.rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
 retrofit.coroutines = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$versions.retrofit_coroutines_adapter"
 retrofit.logging = "com.squareup.okhttp3:logging-interceptor:$versions.okhttp3"
@@ -50,5 +51,9 @@ lifecycle.livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecy
 lifecycle.extensions = "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
 lifecycle.viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
 deps.lifecycle = lifecycle
+
+def glide =[:]
+glide.core = "com.github.bumptech.glide:glide:$versions.glide"
+deps.glide = glide
 
 ext.deps = deps

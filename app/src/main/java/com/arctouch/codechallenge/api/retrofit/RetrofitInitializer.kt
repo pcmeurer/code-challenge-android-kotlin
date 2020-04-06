@@ -2,15 +2,13 @@ package com.arctouch.codechallenge.api.retrofit
 
 import android.app.Application
 import com.arctouch.codechallenge.api.TmdbService
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -36,39 +34,25 @@ class RetrofitInitializer(val app: Application) {
         val cache = createCache()
 
         return OkHttpClient.Builder()
-            .cache(cache)
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(60, TimeUnit.SECONDS)
-            .writeTimeout(60, TimeUnit.SECONDS)
-            .addInterceptor(interceptor)
-//            .addInterceptor(
-//                HostSelectionInterceptor(
-//                    app
-//                )
-//            )
-            .build()
-
-        // TODO: não está sendo passado o cabeçalho de autenticação
+                .cache(cache)
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .addInterceptor(interceptor)
+                .build()
     }
-
-    private fun createGson(): Gson {
-        val builder = GsonBuilder()
-        return builder.create()
-    }
-
 
     private inline fun <reified T> createWebService(): T {
         val okHttpClient = createOkHttpClient()
         val url = baseUrl()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl(url)
-            .addConverterFactory(GsonConverterFactory.create(createGson()))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-//            .addCallAdapterFactory(LiveDataCallAdapterFactory())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .client(okHttpClient)
-            .build()
+                .baseUrl(url)
+                .addConverterFactory(MoshiConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
+                .client(okHttpClient)
+                .build()
 
         return retrofit.create(T::class.java)
     }
