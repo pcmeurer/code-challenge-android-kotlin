@@ -1,13 +1,13 @@
 buildscript {
-    ext.kotlin_version = '1.2.21'
-    ext.support_library_version = '27.0.2'
+    apply from: 'versions.gradle'
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$versions.navigation_safe_args_gradle_plugin"
     }
 }
 
